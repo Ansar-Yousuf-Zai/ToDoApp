@@ -62,3 +62,5 @@ phases:
  post_build: # Push the Docker image to the ECR
    - docker push $REPOSITORY_URI:latest
    - docker push $REPOSITORY_URI:$CODEBUILD_BUILD_NUMBER
+
+   
