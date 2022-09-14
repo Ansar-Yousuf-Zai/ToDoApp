@@ -48,4 +48,4 @@ jobs:
         ECR_REPOSITORY: my-app
         
       with:
-        args: set image deployment/wetravel -n wetravel app-wetravel=$REGISTRY/$REPOSITORY:latest
+        args: set image deployment/wetravel -n wetravel app-wetravel=995105043624.dkr.ecr.eu-central-1.amazonaws.com/we_travel_app:latest
