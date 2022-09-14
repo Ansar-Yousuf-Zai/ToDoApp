@@ -14,6 +14,9 @@ spec:
     matchLabels:
       app.kubernetes.io/name: wetravel
   replicas: 1
+  strategy: 
+    type: Recreate
+    rollingUpdate: null
   template:
     metadata:
       labels:
