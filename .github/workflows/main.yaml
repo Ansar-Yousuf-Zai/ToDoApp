@@ -38,4 +38,4 @@ jobs:
         ECR_REPOSITORY: my-app
         
       with:
-        args: apply -f service.yaml
+        args: set image deployment/wetravel app-wetravel=$REGISTRY/$REPOSITORY:latest
