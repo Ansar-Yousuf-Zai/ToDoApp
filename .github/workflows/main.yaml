@@ -38,7 +38,7 @@ jobs:
         ECR_REPOSITORY: my-app
         
       with:
-        args: kubectl apply -f service.yaml
+        args: apply -f service.yaml
         
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
