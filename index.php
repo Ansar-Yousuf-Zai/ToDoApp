@@ -16,7 +16,7 @@
     <div class="container">
         <form action="process.php" method="POST">
             <div class="todo-table">
-                <h1>My Todo's</h1>
+                <h1>We Travel ToDo Task</h1>
                 <h6><?php 
                             $sql = "SELECT * FROM todos";
                             $result = mysqli_query($db,$sql);
