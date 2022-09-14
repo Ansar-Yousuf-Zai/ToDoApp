@@ -21,13 +21,13 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: wetravel
-    spec:
-      containers:
-        - image: 995105043624.dkr.ecr.eu-central-1.amazonaws.com/we_travel_app:latest
-          imagePullPolicy: Always
-          name: app-wetravel
-          ports:
-          - containerPort: 80
+  spec:
+    containers:
+      - image: 995105043624.dkr.ecr.eu-central-1.amazonaws.com/we_travel_app:latest
+        imagePullPolicy: Always
+        name: app-wetravel
+        ports:
+        - containerPort: 80
           env:
             - name: USER
               value: "admin"
