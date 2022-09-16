@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wetravel
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: wetravel
+  name: wetravel
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: wetravel
+  replicas: 1
+  strategy: 
+    type: Recreate
+    rollingUpdate: null
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: wetravel
+    spec:
+      containers:
+        - image: 995105043624.dkr.ecr.eu-west-2.amazonaws.com/we_travel_app:latest
+          imagePullPolicy: Always
+          name: app-wetravel
+          ports:
+          - containerPort: 80
+          env:
+            - name: USER
+              value: "DbUuser"
+            - name: HOST
+              value: "tf-rds-wetravel.c9n1ajnuuvpe.eu-west-2.rds.amazonaws.com"
+            - name: PASSWORD
+              value: "DbPassword"
+            - name: DBNAME
+              value: "WeTravelTask"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: wetravel
+  name: service-wetravel
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: wetravel
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: wetravel
+  name: ingress-wetravel
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-wetravel
+                port:
+                  number: 80

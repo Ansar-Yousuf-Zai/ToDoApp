@@ -33,19 +33,19 @@ jobs:
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_FRANKFURT }}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: we_travel_app
+        ECR_REPOSITORY: my-app
         
       with:
-        args: apply -f service-frankfurt.yaml
+        args: apply -f service.yaml
         
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_FRANKFURT}}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: we_travel_app
+        ECR_REPOSITORY: my-app
         
       with:
         args: rollout restart deployment -n wetravel

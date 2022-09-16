@@ -30,13 +30,13 @@ spec:
           - containerPort: 80
           env:
             - name: USER
-              value: "admin"
+              value: "DbUuser"
             - name: HOST
-              value: "database-1.cjsqxgbbpzt0.us-east-1.rds.amazonaws.com"
+              value: "tf-rds-wetravel.csbzxhrqkule.eu-central-1.rds.amazonaws.com"
             - name: PASSWORD
-              value: "soban252"
+              value: "DbPassword"
             - name: DBNAME
-              value: "testDB"
+              value: "WeTravelTask"
 ---
 apiVersion: v1
 kind: Service
