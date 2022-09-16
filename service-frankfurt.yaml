@@ -72,3 +72,4 @@ spec:
                 name: service-wetravel
                 port:
                   number: 80
+#testing
