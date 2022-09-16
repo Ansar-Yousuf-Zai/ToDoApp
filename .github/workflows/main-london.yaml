@@ -13,7 +13,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.WETRAVEL_AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.WETRAVEL_AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-central-1
+        aws-region: eu-west-2
     
     - name: Login to Amazon ECR
       id: login-ecr
@@ -33,19 +33,19 @@ jobs:
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_LONDON }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: my-app
+        ECR_REPOSITORY: we_travel_app
         
       with:
-        args: apply -f service.yaml
+        args: apply -f service-london.yaml
         
     - name: deploy to cluster
       uses: kodermax/kubectl-aws-eks@master
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_LONDON}}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: my-app
+        ECR_REPOSITORY: we_travel_app
         
       with:
         args: rollout restart deployment -n wetravel
